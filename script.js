@@ -11,11 +11,11 @@ todoForm.addEventListener("submit", (e) => {
     const newLi = document.createElement("li");
     newLi.innerHTML = `
         <span class="text">${newTodoText}</span>
-        <div class="todo-buttons">
+        <span class="todo-buttons">
             <button class="todo-btn done">Done</button>
             <button class="todo-btn remove">Remove</button>
             <button class="todo-btn edit">Edit</button>
-        </div>`;
+        </span>`;
     todoList.append(newLi);
     todoInput.value = "";
 });
@@ -30,7 +30,6 @@ todoList.addEventListener("click", (e) => {
         liSpan.style.textDecoration = "line-through";
     }
     if (e.target.classList.contains("edit")) {
-        const editlist = e.target.parentNode.parentNode.parentNode.parentNode.querySelector("#input");
         const edittext = e.target.parentNode.parentNode.querySelector(".text").innerHTML;
         todoInput.value = edittext;
     }
