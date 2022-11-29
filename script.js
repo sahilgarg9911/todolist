@@ -1,36 +1,36 @@
-const todoForm = document.querySelector(".form-todo");
-const todoInput = document.querySelector("#input");
-const todoList = document.querySelector(".todo-list");
+let add = document.querySelector("#addbtn");
+let textvalue = document.querySelector("#textvalue");
+let body = document.querySelector("body");
+let s2 = document.querySelector("#s2");
 
-todoForm.addEventListener("submit", (e) => {
-    // agar yeah e nahi lagayene toh add todo button click karne par or enterclick karne
-    // par bar bar page refresh hoga
-    // preventDefault(); (imp)
-    e.preventDefault();
-    const newTodoText = todoInput.value;
-    const newLi = document.createElement("li");
-    newLi.innerHTML = `
-        <span class="text">${newTodoText}</span>
-        <span class="todo-buttons">
-            <button class="todo-btn done">Done</button>
-            <button class="todo-btn remove">Remove</button>
-            <button class="todo-btn edit">Edit</button>
-        </span>`;
-    todoList.append(newLi);
-    todoInput.value = "";
-});
+add.addEventListener('click', () => {
+    let newvalue = textvalue.value;
+    let newspan = document.createElement("span");
+    newspan.innerHTML = `
+    <span class="text">${newvalue}</span>
+    <span class="btns">
+            <button class="btn done">done</button>
+            <button class="btn remove">remove</button>
+            <button class="btn edit">edit</button>
+        </span>
+    `
+    s2.appendChild(newspan);
+    textvalue.value = "";
+})
 
-todoList.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove")) {
-        const targetedLi = e.target.parentNode.parentNode;
-        targetedLi.remove();
+s2.addEventListener('click', (event) => {
+    if (event.target.classList.contains("remove")) {
+        let rtask = event.target.parentNode.parentNode;
+        rtask.remove();
     }
-    if (e.target.classList.contains("done")) {
-        const liSpan = e.target.parentNode.previousElementSibling;
-        liSpan.style.textDecoration = "line-through";
+    if (event.target.classList.contains("edit")) {
+        let etask = event.target.parentNode.previousElementSibling.innerHTML;
+        console.log(etask);
+        textvalue.value = etask;
+
     }
-    if (e.target.classList.contains("edit")) {
-        const edittext = e.target.parentNode.parentNode.querySelector(".text").innerHTML;
-        todoInput.value = edittext;
+    if (event.target.classList.contains("done")) {
+        let dtask = event.target.parentNode.previousElementSibling;
+        dtask.style.textDecoration = "line-through";
     }
-});
+})
